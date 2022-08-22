@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_euro_lowmargin" model="report.paperformat">
+         <field name="name">Holidays Summary</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+    </record>
+        <report
+            id="report_certificate_request"
+            string="Code Audit Request Detail"
+            model="certificate.request"
+            report_type="qweb-pdf"
+            file="school.report_code_audit_request"
+            name="school.report_code_audit_request"/>
+
+        <report
+            id="report_certificate_visit"
+            string="Code Audit Visit Detail"
+            model="certificate.audit.last"
+            report_type="qweb-pdf"
+            file="school.report_code_audit_visit"
+            name="school.report_code_audit_visit"
+            paperformat="school.paperformat_euro_lowmargin"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_lobby_support">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h3 class="text-center">Lobby Support report on objects</h3>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Lobby Request Type</th>
+                                    <th class="text-center">Lobby Request Farm</th>
+                                    <th class="text-center">Request By</th>
+                                    <th class="text-center">Date Of Request</th>
+                                    <th class="text-center">Date Of Visit</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Support Provide</th>
+                                    <th class="text-center">Support Challenge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><span t-field="o.lobbyrequest_id"/></td>
+                                    <td><span t-field="o.request_farm"/></td>
+                                    <td><span t-field="o.request_person"/></td>
+                                    <td><span t-field="o.date_reque"/></td>
+                                    <td><span t-field="o.date_vist"/></td>
+                                    <td><span t-field="o.state"/></td>
+                                    <td><span t-field="o.support_provide"/></td>
+                                    <td><span t-field="o.challenge"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_lobby_request">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h3 class="text-center">Lobby Request report</h3>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Sequence Number</th>
+                                    <th class="text-center">Lobby Request Farm</th>
+                                    <th class="text-center">Request By</th>
+                                    <th class="text-center">Request Name</th>
+                                    <th class="text-center">Date Of Request</th>
+                                    <th class="text-center">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><span t-field="o.lobby_registration_seque"/></td>
+                                    <td><span t-field="o.farm_name"/></td>
+                                    <td><span t-field="o.requested_by"/></td>
+                                    <td><span t-field="o.requested_support"/></td>
+                                    <td><span t-field="o.request_date"/></td>
+                                    <td><span t-field="o.camp_email"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_ipm_support">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h3 class="text-center">IPM Request report</h3>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                  <h2 style="font-size:20px !important;">IPM Sequence Number: <span style="font-size: 20px;" t-esc="o.ipm_study_sequ"/> </h2>
+                                  <h2 style="font-size:20px !important;">Date Of Visit: <span style="font-size: 20px;" t-esc="o.date_vist"/> </h2>
+                                  <h2 style="font-size:20px !important;">Status: <span style="font-size: 20px; position: right: -5px;" t-esc="o.state"/> </h2>
+                                <tr>
+                                    <th class="text-center">IPM Request Farm</th>
+                                    <th class="text-center">Requested support</th>
+                                    <th class="text-center">Request By</th>
+                                    <th class="text-center">Date Of Request</th>
+                                    <th class="text-center">Narrate Progress</th>
+                                    <th class="text-center">Challenge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><span t-field="o.ipm_request_farm"/></td>
+                                    <td><span t-field="o.ipm_request_id"/></td>
+                                    <td><span t-field="o.request_person"/></td>
+                                    <td><span t-field="o.date_reque"/></td>
+                                    <td><span t-field="o.narrate_progress"/></td>
+                                    <td><span t-field="o.challenge"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+ <template id="report_ipm_request">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h3 class="text-center">IPM Request report</h3>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">IPM Request Farm</th>
+                                    <th class="text-center">Requested support</th>
+                                    <th class="text-center">Request By</th>
+                                    <th class="text-center">Date Of Request</th>
+                                    <th class="text-center">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><span t-field="o.ipm_farm_name"/></td>
+                                    <td><span t-field="o.requested_support"/></td>
+                                    <td><span t-field="o.requested_by"/></td>
+                                    <td><span t-field="o.request_date"/></td>
+                                    <td><span t-field="o.camp_email"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_lobby_request">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h3 class="text-center">Lobby Request report</h3>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Lobby Request Farm</th>
+                                    <th class="text-center">Request By</th>
+                                    <th class="text-center">Request Name</th>
+                                    <th class="text-center">Date Of Request</th>
+                                    <th class="text-center">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><span t-field="o.request_farm"/></td>
+                                    <td><span t-field="o.request_person"/></td>
+                                    <td><span t-field="o.request_name"/></td>
+                                    <td><span t-field="o.request_date"/></td>
+                                    <td><span t-field="o.comp_email"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_waste_management_request">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h3 class="text-center">Waste Management Request report</h3>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"> Sequence Number</th>
+                                    <th class="text-center"> Request Farm</th>
+                                    <th class="text-center">Requested support</th>
+                                    <th class="text-center">Request By</th>
+                                    <th class="text-center">Date Of Request</th>
+                                    <th class="text-center">Cluster Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><span t-field="o.west_mana_reqe"/></td>
+                                    <td><span t-field="o.waste_farm"/></td>
+                                    <td><span t-field="o.requested_support_name"/></td>
+                                    <td><span t-field="o.weste_requested_by"/></td>
+                                    <td><span t-field="o.weste_request_date"/></td>
+                                    <td><span t-field="o.west_cluster_name"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+ <template id="report_waste_management_support">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h3 class="text-center">Waste Management Support report</h3>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                <h2 style="font-size:20px !important;">Sequence Number: <span style="font-size: 20px;" t-esc="o.west_manage_sequs"/> </h2>
+                                <h2 style="font-size:20px !important;">Request Farm: <span style="font-size: 20px;" t-esc="o.request_farm"/> </h2>
+                                  <h2 style="font-size:20px !important;">Date Of Visit: <span style="font-size: 20px;" t-esc="o.date_vist"/> </h2>
+                                  <h2 style="font-size:20px !important;">Status: <span style="font-size: 20px; position: right: -5px;" t-esc="o.state"/> </h2>
+                                <tr>
+                                    <th class="text-center">Requested support</th>
+                                    <th class="text-center">Request By</th>
+                                    <th class="text-center">Technology Name</th>
+                                    <th class="text-center">Narrate Progress</th>
+                                    <th class="text-center">Challenge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td><span t-field="o.waste_request_id"/></td>
+                                    <td><span t-field="o.request_person"/></td>
+                                    <td><span t-field="o.technology_name"/></td>
+                                    <td><span t-field="o.narrate_progress"/></td>
+                                    <td><span t-field="o.challenge"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<odoo>
+            <!-- Form View Of Code Audite Visit Form -->
+        <record id="view_certificate_audit_visit_form" model="ir.ui.view">
+            <field name="name">certificate.audit.last.form</field>
+            <field name="model">certificate.audit.last</field>
+            <field name="arch" type="xml">
+                <form string="Certificate Audit Visit">
+                    <header>
+                      <button name="baseline_audit" type="object"  string="Pre Audit" states="baseline_home"  class="oe_highlight"/>
+                      <button name="action_pre_audit" type="object"  string="Pre Audit" states="baseline_audit"  class="oe_highlight"/>
+                      <button name="action_apply_external_audit" type="object" string="Apply External Audit" states="pre_audit"   class="oe_highlight"/>
+                      <button name="action_rejected_external_audit" type="object" string="Reject" states="apply_external_audit"   class="btn-primary oe_highlight"/>
+                        <button name="action_pre_audit" type="object"  string="Pre Audit" states="rejected_external_audit"  class="oe_highlight"/>
+                      <button name="action_accepted_external_audit" states="apply_external_audit" string="Accepted" type="object" class="btn-primary oe_highlight"/>
+                      <button name="action_audit_conducted" states="accepted_external_audit" string="Audit Conducted" type="object" class="btn-primary oe_highlight"/>
+                      <button name="action_audit_certified" states="certified,audit_conducted," string="Certified" type="object" class="oe_highlight"/>
+                      <button name="action_audit_noncomplien" states="non_compliant,audit_conducted," string="Rejected" type="object" class="oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="baseline_audit,pre_audit,apply_external_audit,accepted_external_audit,rejected_external_audit,audit_conducted,certified,non_compliant"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="viste_seque" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="certificate_audit_visit">
+                            <field name="certificaterequest_id" placeholder="Request Name" />
+                            <field name="camp_name"/>
+                            <field name="certificate_award"/>
+                            <field name="date_reque"/>
+                            <field name="date_begin"/>
+                            <field name="date_expire"/>
+                            <field name="Certificate_Issue_Date"/>
+                            <field name="audit_finding"/>
+                            <field name="recommended_support"/>
+                            <field name="support_requested"/>
+                            <field name="visite_history"/>
+                            <field name="vist_camp_email"/>
+                        </group>
+                    </sheet>
+                    <notebook>
+                        <page string="Follow up">
+                            <group>
+                                <field name="follow_up" state="certified"/>
+                            </group>
+                        </page>
+                        <page string="Email Schedule">
+                                <group>
+                                    <field name="reply_to"/>
+                                </group>
+                                <field name="expire_mail_ids">
+                                    <tree string="Email Schedule" editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="template_id" />
+                                        <field name="interval_nbr" attrs="{'readonly':[('interval_unit','=','now')]}"/>
+                                        <field name="interval_unit"/>
+                                        <field name="interval_type"/>
+                                        <field name="certified"/>
+                                    </tree>
+                                </field>
+                            </page>
+                    </notebook>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Code Audit Visit View -->
+        <record id="view_certificate_audit_visit_tree" model="ir.ui.view">
+            <field name="name">certificate.audit.last.tree</field>
+            <field name="model">certificate.audit.last</field>
+            <field name="arch" type="xml">
+                <tree string="Certificate Audit Visit">
+                    <field name="viste_seque"/>
+                    <field name="certificaterequest_id" />
+                    <field name="date_reque" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+    <!-- Certificate Audit Visit Search View View Form -->
+        <record id="view_certificate_audit_visit_filter" model="ir.ui.view">
+            <field name="name">certificate.audit.last.list.select</field>
+            <field name="model">certificate.audit.last</field>
+            <field name="arch" type="xml">
+                <search string="Search Waste Management Pilot">
+                    <field name="viste_seque" string="Waste Management" filter_domain="['|',('viste_seque','ilike',self),('certificaterequest_id','ilike',self),('date_begin','ilike',self)]"/>
+                    <field name="certificaterequest_id"/>
+                    <field name="camp_name"/>
+                    <field name="date_reque"/>
+                    <field name="date_begin"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="camp_name" string="Date of Request" domain="[]" context="{'group_by':'camp_name'}"/>
+                        <filter name="date_reque" string="Date of Visit" domain="[]" context="{'group_by':'date_reque'}"/>
+                        <filter name="date_begin" string="Date of Visit" domain="[]" context="{'group_by':'date_begin'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'request_farm'}"/>
+                        <filter string="state" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For Certificate Audit Visit -->
+         <record id="view_certificate_visit_kanban" model="ir.ui.view">
+            <field name="name">certificate.audit.last.kanban</field>
+            <field name="model">certificate.audit.last</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="viste_seque"/>
+                    <field name="camp_name"/>
+                    <field name="date_begin"/>
+                    <field name="date_reque"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.viste_seque.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.camp_name.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.date_begin.value"/> <t t-esc="record.date_begin.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.date_reque.value"/> <t t-esc="record.date_reque.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.state.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For Certificate View -->
+        <record id="view_certificate_audit_visit_graph" model="ir.ui.view" >
+            <field name="name">certificate.audit.last.graph</field>
+            <field name="model">certificate.audit.last</field>
+            <field name="arch" type="xml">
+                <graph string="Certificate Audit Company">
+<!--                    <field name="partner_id"/>-->
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_audit_visit_form1" model="ir.actions.act_window">
+            <field name="name">Certificate Audit Visit</field>
+            <field name="res_model">certificate.audit.last</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="" />
+            <field name="view_mode">tree,form,graph,search,kanban</field>
+        </record>
+
+               <!-- EXPIRE.MAIL VIEWS -->
+        <record model="ir.ui.view" id="view_expire_mail_form">
+            <field name="name">expire.mail.form</field>
+            <field name="model">expire.mail</field>
+            <field name="arch" type="xml">
+                <form string="Certificate Expire Mail Scheduler">
+                    <group>
+                        <field name="expire_id"/>
+                        <field name="template_id"/>
+                        <field name="mail_sent"/>
+                    </group>
+                    <group>
+                        <field name="interval_nbr" attrs="{'readonly':[('interval_unit', '=', 'now')]}"/>
+                        <field name="interval_unit"/>
+                        <field name="interval_type"/>
+                        <field name="scheduled_date"/>
+                    </group>
+                    <notebook groups="base.group_no_one">
+                        <page string="Registration Mails" >
+                            <field name="mail_registration_ids">
+                                <tree string="Registration mail" editable="bottom">
+                                    <field name="registration_id"/>
+                                    <field name="scheduled_date"/>
+                                    <field name="mail_sent"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_expire_mail_tree">
+            <field name="name">expire.mail.tree</field>
+            <field name="model">expire.mail</field>
+            <field name="arch" type="xml">
+                <tree string="Certificate Expire Mail Schedulers">
+                    <field name="expire_id"/>
+                    <field name="template_id"/>
+                    <field name="scheduled_date"/>
+                    <field name="mail_sent"/>
+                    <field name="certified"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_expire_mail">
+            <field name="name">Certificate Expire Mail Schedulers</field>
+            <field name="res_model">expire.mail</field>
+            <field name="view_type">form</field>
+        </record>
+     <menuitem id="menu_expire_mail_schedulers" name="Certificate Expire Notification Schedule" parent="menu_codeaudit_config_form" action="action_expire_mail"/>
+     <menuitem id="submenu_certificate_audit_visit" name="Code Audit Visit" parent="menu_codeaudit_config_form" action="action_audit_visit_form1"/>
+
+</odoo>
