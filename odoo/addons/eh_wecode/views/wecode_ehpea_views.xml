@@ -1,0 +1,1437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<odoo>
+    <data>
+        <!-- Form View Of Code Audite Visit Form -->
+        <record id="view_lobby_support_form" model="ir.ui.view">
+            <field name="name">lobby.support.form.form</field>
+            <field name="model">lobby.support.form</field>
+            <field name="arch" type="xml">
+                <form string="Lobby Support Visit">
+                    <header>
+                      <button name="print_report" type="object"  string="Print"  class="oe_highlight"/>
+                      <button name="action_ongoing" type="object"  string="On-going" state="draft"  class="oe_highlight"/>
+                      <button name="action_completed" type="object" string="Completed" state="ong-going"  class="oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="draft,ong-going,completed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="lobby_seque" readonly="1"/>
+                        </h1>
+                       </div>
+                        <group name="certificate_audit_visit">
+                            <field name="lobbyrequest_id" placeholder="Lobby Name" />
+                            <field name="request_person"/>
+                            <field name="date_reque"/>
+                            <field name="date_vist"/>
+                            <field name="cluster_name"/>
+                            <field name="support_provide"/>
+                            <field name="challenge"/>
+                            <field name="vist_camp_email"/>
+                            <field name="visite_history"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Code Audit Visit View -->
+        <record id="view_lobby_support_tree" model="ir.ui.view">
+            <field name="name">lobby.support.form.tree</field>
+            <field name="model">lobby.support.form</field>
+            <field name="arch" type="xml">
+                <tree string="Lobby Support Visit">
+                    <field name="lobby_seque"/>
+                    <field name="lobbyrequest_id"/>
+                    <field name="date_reque"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Lobby Support Graph View -->
+        <record id="view_lobby_support_graph" model="ir.ui.view" >
+            <field name="name">lobby.support.form.graph</field>
+            <field name="model">lobby.support.form</field>
+            <field name="arch" type="xml">
+                <graph string="Lobby Support">
+<!--                    <field name="partner_id"/>-->
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Kanban View For Lobby Support -->
+         <record id="view_lobby_support_kanban" model="ir.ui.view">
+            <field name="name">lobby.support.form.kanban</field>
+            <field name="model">lobby.support.form</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="lobbyrequest_id"/>
+                    <field name="request_person"/>
+                    <field name="date_reque"/>
+                    <field name="date_vist"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.lobbyrequest_id.value"/></span></strong>
+                                    </div>
+<!--                                    <div class="col-xs-6 pull-right text-right">-->
+<!--                                        <strong><field name="request_person" widget="monetary"/></strong>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.date_reque.value"/> <t t-esc="record.date_reque.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.date_vist.value"/> <t t-esc="record.date_vist.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span class="pull-right text-right">
+                                            <field name="state" widget="kanban_label_selection" options="{'classes': {'draft': 'on_going','completed': 'default',
+                                            'draft': 'completed'}}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Search View For Lobby Support -->
+        <record id="view_sales_order_filter" model="ir.ui.view">
+            <field name="name">lobby.support.form.select</field>
+            <field name="model">lobby.support.form</field>
+            <field name="arch" type="xml">
+                <search string="Search Lobby Support">
+                    <field name="lobbyrequest_id" string="Lobby Support" filter_domain="['|',('lobbyrequest_id','ilike',self),('lobby_seque','ilike',self),('request_person','ilike',self)]"/>
+                    <field name="request_person"/>
+                    <field name="date_reque"/>
+                    <field name="date_vist"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Support Type" domain="[]" context="{'group_by':'lobbyrequest_id'}"/>
+                        <filter name="state" string="Status" domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Request Month" domain="[]" context="{'group_by':'date_reque'}"/>
+                        <filter string="Visit Month" domain="[]" context="{'group_by':'date_vist'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_lobby_support_form" model="ir.actions.act_window">
+            <field name="name">Lobby Support Visit</field>
+            <field name="res_model">lobby.support.form</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,kanban,search</field>
+        </record>
+         <!-- IPM Request Form Viewe -->
+         <record id="view_ipm_request_form" model="ir.ui.view">
+            <field name="name">ipm.study.request.form</field>
+            <field name="model">ipm.study.request</field>
+            <field name="arch" type="xml">
+                <form string="IPM Study Request">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="ipm_study_request_sequ" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="ipm_request">
+                            <field name="ipm_farm_name" placeholder="Request Farm Name" />
+                            <field name="requested_support"/>
+                            <field name="requested_by"/>
+                            <field name="Cluster_name"/>
+                            <field name="request_date"/>
+                            <field name="camp_email"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of Lobby Request Form -->
+        <record id="view_ipm_request_tree" model="ir.ui.view">
+            <field name="name">ipm.study.request.tree</field>
+            <field name="model">ipm.study.request</field>
+            <field name="arch" type="xml">
+                <tree string="IPM Request">
+                    <field name="ipm_study_request_sequ" string="IPM Request Number"/>
+                    <field name="requested_support"/>
+                    <field name="ipm_farm_name"/>
+                    <field name="request_date"/>
+                </tree>
+            </field>
+        </record>
+        <!-- IPM Search View View Form -->
+        <record id="view_ipm_request_filter" model="ir.ui.view">
+            <field name="name">ipm.study.request.list.select</field>
+            <field name="model">ipm.study.request</field>
+            <field name="arch" type="xml">
+                <search string="Search IPM Request">
+                    <field name="ipm_study_request_sequ" string="Sales Order" filter_domain="['|',('ipm_study_request_sequ','ilike',self),('ipm_farm_name','ilike',self),('requested_support','ilike',self)]"/>
+                    <field name="requested_support"/>
+<!--                    <field name="Cluster_name"/>-->
+                    <field name="request_date"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="date_of_request" string="Date of Request" domain="[]" context="{'group_by':'request_date'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'ipm_farm_name'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For IPM Request -->
+         <record id="view_imp_request_kanban" model="ir.ui.view">
+            <field name="name">ipm.study.request.kanban</field>
+            <field name="model">ipm.study.request</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="ipm_study_request_sequ"/>
+                    <field name="ipm_farm_name"/>
+                    <field name="requested_support"/>
+                    <field name="request_date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.ipm_study_request_sequ.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.ipm_farm_name.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.request_date.value"/> <t t-esc="record.request_date.value"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For IPM Request View -->
+        <record id="view_ipm_request_graph" model="ir.ui.view" >
+            <field name="name">ipm.study.request.graph</field>
+            <field name="model">ipm.study.request</field>
+            <field name="arch" type="xml">
+                <graph string="IPM Support Request">
+<!--                    <field name="partner_id"/>-->
+                    <field name="request_date"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of IPM Request Form & Tree View -->
+         <record id="action_ipm_request_form" model="ir.actions.act_window">
+            <field name="name">IPM Request</field>
+            <field name="res_model">ipm.study.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search,kanban,graph</field>
+        </record>
+          <!-- Gender Support Request Form Viewe -->
+         <record id="view_gender_support_request_form" model="ir.ui.view">
+            <field name="name">gender.support.request.form</field>
+            <field name="model">gender.support.request</field>
+            <field name="arch" type="xml">
+                <form string="Gender Study Request">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="gender_study_request_sequ" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="ipm_request">
+                            <field name="gender_farm_name" placeholder="Request Farm Name" />
+                            <field name="gender_requested_support"/>
+                            <field name="gender_requested_by"/>
+                            <field name="gender_Cluster_name"/>
+                            <field name="gender_request_date"/>
+                            <field name="Service_Proposed_Date"/>
+                            <field name="camp_email"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of Gender Request Form -->
+        <record id="view_gender_support_request_tree" model="ir.ui.view">
+            <field name="name">gender.support.request.tree</field>
+            <field name="model">gender.support.request</field>
+            <field name="arch" type="xml">
+                <tree string="Gender Support Request">
+                    <field name="gender_study_request_sequ" string="Gender Request Number"/>
+                    <field name="gender_requested_support"/>
+                    <field name="gender_farm_name"/>
+                    <field name="gender_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Gender Search View View Form -->
+        <record id="view_gender_support_request_filter" model="ir.ui.view">
+            <field name="name">gender.support.request.list.select</field>
+            <field name="model">gender.support.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Gender Support Request">
+                    <field name="gender_study_request_sequ" string="Sales Order" filter_domain="['|',('gender_study_request_sequ','ilike',self),('gender_farm_name','ilike',self),('gender_requested_support','ilike',self)]"/>
+                    <field name="gender_requested_support"/>
+<!--                    <field name="gender_Cluster_name"/>-->
+                    <field name="gender_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                    <field name="camp_name"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="date_of_request" string="Date of Request" domain="[]" context="{'group_by':'gender_request_date'}"/>
+                        <filter name="Service_Proposed_Date" string="Service Proposed Date" domain="[]" context="{'group_by':'Service_Proposed_Date'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'gender_farm_name'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For IPM Request -->
+         <record id="view_gender_support_request_kanban" model="ir.ui.view">
+            <field name="name">gender.support.request.kanban</field>
+            <field name="model">gender.support.request</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="gender_study_request_sequ"/>
+                    <field name="gender_farm_name"/>
+                    <field name="gender_requested_support"/>
+                    <field name="gender_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                    <field name="camp_name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.gender_study_request_sequ.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.gender_farm_name.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.gender_request_date.value"/> <t t-esc="record.gender_request_date.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.Service_Proposed_Date.value"/> <t t-esc="record.Service_Proposed_Date.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.camp_name.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For Gender support Request View -->
+        <record id="view_gender_support_request_graph" model="ir.ui.view" >
+            <field name="name">gender.support.request.graph</field>
+            <field name="model">gender.support.request</field>
+            <field name="arch" type="xml">
+                <graph string="Gender Support Request">
+<!--                    <field name="partner_id"/>-->
+                    <field name="gender_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Gender Request Form & Tree View -->
+         <record id="action_gender_support_request_form" model="ir.actions.act_window">
+            <field name="name">Gender Support Request</field>
+            <field name="res_model">gender.support.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search,kanban,graph</field>
+        </record>
+        <!-- Gender Support Status Progress Visit -->
+
+        <!-- Form View of IPM Study Progress Visit -->
+         <record id="view_gender_support_form" model="ir.ui.view">
+            <field name="name">gender.study.tracking.form</field>
+            <field name="model">gender.study.tracking</field>
+            <field name="arch" type="xml">
+                <form string="Gender Support Visit">
+                    <header>
+                      <button name="action_verification" type="object"  string="Verification/Testing" states="identification"  class="oe_highlight"/>
+                      <button name="action_registration" type="object" string="Registration" states="verification"   class="oe_highlight"/>
+                      <button name="action_replication" type="object" string="Replication in other Farms" states="registration"   class="btn-primary oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="identification,verification,registration,replication_other"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="gender_study_sequ" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="gender_study_visit">
+                            <field name="gender_request_id" placeholder="Support Request Name" />
+                            <field name="gender_request_farm"/>
+                            <field name="gender_request_person"/>
+                            <field name="gender_date_reque"/>
+                            <field name="gender_date_vist"/>
+                            <field name="gender_visit_cluster_names"/>
+                            <field name="gender_support_provide"/>
+                            <field name="gender_challenge"/>
+                            <field name="vist_camp_email"/>
+                            <field name="gender_narrate_progress"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Gender Study Tracking View -->
+        <record id="view_gender_support_tree" model="ir.ui.view">
+            <field name="name">gender.study.tracking.tree</field>
+            <field name="model">gender.study.tracking</field>
+            <field name="arch" type="xml">
+                <tree string="Gender Study Visit">
+                    <field name="gender_study_sequ"/>
+                    <field name="gender_request_id"/>
+                    <field name="gender_date_reque"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+         <!-- Gender Search View View Form -->
+        <record id="view_gender_tracking_filter" model="ir.ui.view">
+            <field name="name">gender.study.tracking.list.select</field>
+            <field name="model">gender.study.tracking</field>
+            <field name="arch" type="xml">
+                <search string="Search Gender Tracking">
+                    <field name="gender_study_sequ" string="Gender Tracking" filter_domain="['|',('gender_study_sequ','ilike',self),('gender_request_id','ilike',self),('partner_id','ilike',self)]"/>
+                    <field name="gender_date_reque"/>
+                    <field name="gender_visit_cluster_names"/>
+                    <field name="gender_date_vist"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="gender_date_reque" string="Date of Request" domain="[]" context="{'group_by':'gender_date_reque'}"/>
+                        <filter name="gender_date_vist" string="Date of Visit" domain="[]" context="{'group_by':'gender_date_vist'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'ipm_request_farm'}"/>
+                        <filter string="State" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For Gender Tracking -->
+         <record id="view_gender_tracking_kanban" model="ir.ui.view">
+            <field name="name">gender.study.tracking.kanban</field>
+            <field name="model">gender.study.tracking</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="gender_study_sequ"/>
+                    <field name="gender_request_farm"/>
+                    <field name="gender_date_reque"/>
+                    <field name="gender_date_vist"/>
+                    <field name="gender_visit_cluster_names"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.gender_study_sequ.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.partner_id.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.gender_date_reque.value"/> <t t-esc="record.gender_date_reque.value"/></span>
+                                    </div>
+                                       <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.gender_date_vist.value"/> <t t-esc="record.gender_date_vist.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.gender_visit_cluster_names.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For GenderTracking View -->
+        <record id="view_gender_traking_graph" model="ir.ui.view" >
+            <field name="name">gender.study.tracking.graph</field>
+            <field name="model">gender.study.tracking</field>
+            <field name="arch" type="xml">
+                <graph string="Gender Support Tracking">
+<!--                    <field name="partner_id"/>-->
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_gender_support_form" model="ir.actions.act_window">
+            <field name="name">Gender Study Visit</field>
+            <field name="res_model">gender.study.tracking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search,kanban,graph</field>
+        </record>
+        <!-- Form View of IPM Study Progress Visit -->
+         <record id="view_ipm_support_form" model="ir.ui.view">
+            <field name="name">ipm.study.tracking.form</field>
+            <field name="model">ipm.study.tracking</field>
+            <field name="arch" type="xml">
+                <form string="IPM Support Visit">
+                    <header>
+                      <button name="action_verification" type="object"  string="Verification/Testing" states="identification"  class="oe_highlight"/>
+                      <button name="action_registration" type="object" string="Registration" states="verification"   class="oe_highlight"/>
+                      <button name="action_replication" type="object" string="Replication in other Farms" states="registration"   class="btn-primary oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="identification,verification,registration,replication_other"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="ipm_study_sequ" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="ipm_study_visit">
+                            <field name="ipm_request_id" placeholder="Support Request Name" />
+                            <field name="request_person"/>
+                            <field name="date_reque"/>
+                            <field name="date_vist"/>
+                            <field name="cluster_names"/>
+                            <field name="support_provide"/>
+                            <field name="challenge"/>
+                            <field name="vist_camp_email"/>
+                            <field name="narrate_progress"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For IPM Study Tracking View -->
+        <record id="view_ipm_support_tree" model="ir.ui.view">
+            <field name="name">ipm.study.tracking.tree</field>
+            <field name="model">ipm.study.tracking</field>
+            <field name="arch" type="xml">
+                <tree string="IPM Study Visit">
+                    <field name="ipm_study_sequ"/>
+                    <field name="ipm_request_id"/>
+                    <field name="date_reque"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+         <!-- IPM Search View View Form -->
+        <record id="view_ipm_tracking_filter" model="ir.ui.view">
+            <field name="name">ipm.study.tracking.list.select</field>
+            <field name="model">ipm.study.tracking</field>
+            <field name="arch" type="xml">
+                <search string="Search IPM Tracking">
+                    <field name="ipm_study_sequ" string="IPM Tracking" filter_domain="['|',('ipm_study_sequ','ilike',self),('ipm_request_id','ilike',self),('partner_id','ilike',self)]"/>
+                    <field name="date_reque"/>
+                    <field name="cluster_names"/>
+                    <field name="date_vist"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="date_reque" string="Date of Request" domain="[]" context="{'group_by':'date_reque'}"/>
+                        <filter name="date_vist" string="Date of Visit" domain="[]" context="{'group_by':'date_vist'}"/>
+                        <filter string="State" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For IPM Tracking -->
+         <record id="view_imp_tracking_kanban" model="ir.ui.view">
+            <field name="name">ipm.study.tracking.kanban</field>
+            <field name="model">ipm.study.tracking</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="ipm_study_sequ"/>
+                    <field name="date_reque"/>
+                    <field name="date_vist"/>
+                    <field name="cluster_names"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.ipm_study_sequ.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.partner_id.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.date_reque.value"/> <t t-esc="record.date_reque.value"/></span>
+                                    </div>
+                                       <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.date_vist.value"/> <t t-esc="record.date_vist.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.cluster_names.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For IPM Tracking View -->
+        <record id="view_ipm_traking_graph" model="ir.ui.view" >
+            <field name="name">ipm.study.tracking.graph</field>
+            <field name="model">ipm.study.tracking</field>
+            <field name="arch" type="xml">
+                <graph string="IPM Support Tracking">
+<!--                    <field name="partner_id"/>-->
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_ipm_support_form" model="ir.actions.act_window">
+            <field name="name">IPM Study Visit</field>
+            <field name="res_model">ipm.study.tracking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search,kanban,graph</field>
+        </record>
+         <!-- Form View For Waste Management Request Form -->
+        <record id="view_waste_management_request_form" model="ir.ui.view">
+            <field name="name">waste.management.request.form</field>
+            <field name="model">waste.management.request</field>
+            <field name="arch" type="xml">
+                <form string="Waste Management Request">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="west_mana_reqe" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="waste_management_request">
+                            <field name="waste_farm" placeholder="Request Farm Name" />
+                            <field name="requested_support_name"/>
+                            <field name="weste_requested_by"/>
+                            <field name="west_cluster_name"/>
+                            <field name="weste_request_date"/>
+                            <field name="Service_Proposed_Date"/>
+<!--                            <field name="request_camp_name" />-->
+                            <field name="west_camp_email"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Waste Management Request Form -->
+        <record id="view_waste_management_tree" model="ir.ui.view">
+            <field name="name">waste.management.request.tree</field>
+            <field name="model">waste.management.request</field>
+            <field name="arch" type="xml">
+                <tree string="Waste Management Request">
+                    <field name="west_mana_reqe" string="Waste Management Request Number"/>
+                    <field name="requested_support_name"/>
+                    <field name="waste_farm"/>
+                    <field name="weste_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                </tree>
+            </field>
+        </record>
+            <!-- Waste Management Search View View Form -->
+        <record id="view_waste_management_filter" model="ir.ui.view">
+            <field name="name">waste.management.request.list.select</field>
+            <field name="model">waste.management.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Waste Management">
+                    <field name="west_mana_reqe" string="Waste Management" filter_domain="['|',('west_mana_reqe','ilike',self),('waste_farm','ilike',self),('weste_request_date','ilike',self)]"/>
+                    <field name="weste_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                    <field name="west_cluster_name"/>
+                    <field name="west_camp_email"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="weste_request_date" string="Date of Request" domain="[]" context="{'group_by':'weste_request_date'}"/>
+                        <filter name="Service_Proposed_Date" string="Service Proposed Date" domain="[]" context="{'group_by':'Service_Proposed_Date'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'waste_farm'}"/>
+                        <filter string="west_cluster_name" domain="[]" context="{'group_by':'west_cluster_name'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For IPM Tracking -->
+         <record id="view_waste_management_kanban" model="ir.ui.view">
+            <field name="name">waste.management.request.kanban</field>
+            <field name="model">waste.management.request</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="west_mana_reqe"/>
+<!--                    <field name="request_camp_name"/>-->
+                    <field name="weste_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                    <field name="waste_farm"/>
+                    <field name="west_cluster_name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.west_mana_reqe.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.waste_farm.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.weste_request_date.value"/> <t t-esc="record.weste_request_date.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.west_cluster_name.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.Service_Proposed_Date.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For IPM Tracking View -->
+        <record id="view_waste_management_graph" model="ir.ui.view" >
+            <field name="name">waste.management.request.graph</field>
+            <field name="model">waste.management.request</field>
+            <field name="arch" type="xml">
+                <graph string="Waste Management">
+                    <field name="waste_farm"/>
+                    <field name="weste_request_date"/>
+                    <field name="Service_Proposed_Date"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Waste Management Request Form & Tree View -->
+         <record id="action_waste_management_request_form" model="ir.actions.act_window">
+            <field name="name">Waste Management Request</field>
+            <field name="res_model">waste.management.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,search,kanban</field>
+        </record>
+            <!-- Form View for Waste Management Piloting Form -->
+        <record id="view_waste_management_pilot_form" model="ir.ui.view">
+            <field name="name">waste.management.pilot.form</field>
+            <field name="model">waste.management.pilot</field>
+            <field name="arch" type="xml">
+                <form string="Waste Management Pilot">
+                    <header>
+                      <button name="action_ongoing" type="object"  string="On-going" states="draft"  class="oe_highlight"/>
+                      <button name="action_completed" type="object" string="completed" states="ongoing"   class="oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,completed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="west_manage_sequs" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="waste_management_pilot">
+                            <field name="waste_request_id" placeholder="Support Request Name" />
+                            <field name="request_farm"/>
+                            <field name="request_person"/>
+                            <field name="date_reque"/>
+                            <field name="date_vist"/>
+                            <field name="cluster_names"/>
+                            <field name="technology_name"/>
+                            <field name="challenge"/>
+                            <field name="vist_camp_email"/>
+                            <field name="narrate_progress"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Waste Management Pilot View -->
+        <record id="view_waste_pilot_manage_tree" model="ir.ui.view">
+            <field name="name">waste.management.pilot.tree</field>
+            <field name="model">waste.management.pilot</field>
+            <field name="arch" type="xml">
+                <tree string="Waste Management Visit">
+                    <field name="west_manage_sequs"/>
+                    <field name="waste_request_id"/>
+                    <field name="date_reque"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Waste Management Pilot Search View View Form -->
+        <record id="view_waste_management_pilot_filter" model="ir.ui.view">
+            <field name="name">waste.management.pilot.list.select</field>
+            <field name="model">waste.management.pilot</field>
+            <field name="arch" type="xml">
+                <search string="Search Waste Management Pilot">
+                    <field name="west_manage_sequs" string="Waste Management" filter_domain="['|',('west_manage_sequs','ilike',self),('request_farm','ilike',self),('date_vist','ilike',self)]"/>
+                    <field name="waste_request_id"/>
+                    <field name="request_farm"/>
+                    <field name="date_reque"/>
+                    <field name="date_vist"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="date_reque" string="Date of Request" domain="[]" context="{'group_by':'date_reque'}"/>
+                        <filter name="date_vist" string="Date of Visit" domain="[]" context="{'group_by':'date_vist'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'request_farm'}"/>
+                        <filter string="state" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For Waste Management Pilot -->
+         <record id="view_waste_management_pilot_kanban" model="ir.ui.view">
+            <field name="name">waste.management.pilot.kanban</field>
+            <field name="model">waste.management.pilot</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="west_manage_sequs"/>
+                    <field name="request_farm"/>
+                    <field name="date_reque"/>
+                    <field name="date_vist"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.west_manage_sequs.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.request_farm.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.date_reque.value"/> <t t-esc="record.date_reque.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.state.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For Waste Management Pilot View -->
+        <record id="view_waste_management_piloting_graph" model="ir.ui.view" >
+            <field name="name">waste.management.pilot.graph</field>
+            <field name="model">waste.management.pilot</field>
+            <field name="arch" type="xml">
+                <graph string="Waste Management Piloting">
+<!--                    <field name="partner_id"/>-->
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_waste_management_form" model="ir.actions.act_window">
+            <field name="name">Waste Management Pilot</field>
+            <field name="res_model">waste.management.pilot</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,search,kanban</field>
+        </record>
+
+
+         <!-- Form View for Annual Survey Form -->
+        <record id="view_annual_farm_form" model="ir.ui.view">
+            <field name="name">annual.farm.survey.form</field>
+            <field name="model">annual.farm.survey</field>
+            <field name="arch" type="xml">
+                <form string="Annual Farm Survey">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="survey_seque" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="annual_farm_survey">
+                            <field name="farm_survey"/>
+                            <group name="farm_land_size" String="Farm Land Size">
+                                <field name="developed_land"/>
+                                <field name="undeveloped_land"/>
+                                <field name="total_land_size"/>
+                             </group>
+                            <group name="farm_crop_type" String="Crop Type">
+                                <field name="cut_flower"/>
+                                <field name="fruit"/>
+                                <field name="vegertables"/>
+                                <field name="herbs"/>
+                                <field name="area_not_production"/>
+                            </group>
+                            <group name="farm_work_force" String="Farm Work Force">
+                                <field name="managerial"/>
+                                <field name="daily_laborer"/>
+                                <field name="total_work_force"/>
+                                <field name="wage_rate"/>
+                            </group>
+                            <group name="farm_production_marketing" String="Source from the Farm">
+                                <field name="farm_volume_exp"/>
+                                <field name="farm_value_exp"/>
+                            </group>
+                            <group name="farm_custom" String="Sources From Customs Authority" >
+                                <field name="custom_volume_exp"/>
+                                <field name="custom_value_exp"/>
+                            </group>
+                            <group name="farm_national_bank" String="Sources From National Bank Of Ethiopia " >
+                                <field name="national_volume_exp"/>
+                                <field name="national_value_exp"/>
+                            </group>
+                            <field name="survey_year"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Code Audit Visit View -->
+        <record id="view_annual_farm_survey_tree" model="ir.ui.view">
+            <field name="name">annual.farm.survey.tree</field>
+            <field name="model">annual.farm.survey</field>
+            <field name="arch" type="xml">
+                <tree string="Annual Farm Survey">
+                    <field name="survey_seque"/>
+                    <field name="farm_survey"/>
+                    <field name="survey_year"/>
+                </tree>
+            </field>
+        </record>
+                <!-- Annual Farm Survey Search View View Form -->
+        <record id="view_annual_farm_survey_filter" model="ir.ui.view">
+            <field name="name">annual.farm.survey.list.select</field>
+            <field name="model">annual.farm.survey</field>
+            <field name="arch" type="xml">
+                <search string="Search Annual Farm Survey">
+                    <field name="survey_seque" string="Waste Management" filter_domain="['|',('survey_seque','ilike',self),('farm_survey','ilike',self),('survey_year','ilike',self)]"/>
+                    <field name="farm_survey"/>
+                    <field name="farm_survey"/>
+                    <field name="managerial"/>
+                    <group expand="0" string="Group By">
+<!--                        <filter string="Salesperson" domain="[]" context="{'group_by':'user_id'}"/>-->
+                        <filter name="cut_flower" string="Cut Flower Producer" domain="[]" context="{'group_by':'cut_flower'}"/>
+                        <filter name="fruit" string="Fruit Producer" domain="[]" context="{'group_by':'fruit'}"/>
+                        <filter name="vegertables" string="Vagetebl Producer" domain="[]" context="{'group_by':'vegertables'}"/>
+                        <filter name="herbs" string="Herbs Producer" domain="[]" context="{'group_by':'herbs'}"/>
+                        <filter name="area_not_production" string="Herbs Producer" domain="[]" context="{'group_by':'area_not_production'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'farm_survey'}"/>
+                        <filter string="Survey" domain="[]" context="{'group_by':'survey_year'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For Annual Farm Survey -->
+         <record id="view_annual_farm_survey_kanban" model="ir.ui.view">
+            <field name="name">annual.farm.survey.kanban</field>
+            <field name="model">annual.farm.survey</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="survey_seque"/>
+                    <field name="farm_survey"/>
+                    <field name="survey_year"/>
+                    <field name="total_land_size"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.survey_seque.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.farm_survey.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.survey_year.value"/> <t t-esc="record.survey_year.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.total_land_size.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For Annual Farm Survey View -->
+        <record id="view_annual_farm_survey_graph" model="ir.ui.view" >
+            <field name="name">annual.farm.survey.graph</field>
+            <field name="model">annual.farm.survey</field>
+            <field name="arch" type="xml">
+                <graph string="Waste Management Piloting">
+<!--                    <field name="partner_id"/>-->
+<!--                    <field name="state"/>-->
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_annual_farm_survey_form" model="ir.actions.act_window">
+            <field name="name">Annual Farm Survey</field>
+            <field name="res_model">annual.farm.survey</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search,graph,kanban</field>
+        </record>
+
+<!--                &lt;!&ndash; Form view Cluster TaskForce Committee &ndash;&gt;-->
+<!--        <record id="view_cluster_task_form" model="ir.ui.view">-->
+<!--            <field name="name">cluster.taskforce.met.form</field>-->
+<!--            <field name="model">cluster.taskforce.met</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Cluster TaskForce Committee">-->
+<!--                    <sheet>-->
+<!--&lt;!&ndash;                        <div class="oe_title">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="meeting_reqe" readonly="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                        <group>-->
+<!--                            <field name="prepared_by" placeholder="Prepared By" />-->
+<!--                            <field name="region_of_taskforce"/>-->
+<!--                            <field name="venue_of_meeting"/>-->
+<!--                            <field name="date_of_meeting"/>-->
+<!--                            <field name="meeting_agenda"/>-->
+<!--                            <field name="way_forward"/>-->
+<!--                            <field name="participant_id"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                 <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>div-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Tree View OF Cluster Task Force &ndash;&gt;-->
+<!--        <record id="view_cluster_taskforce_tree" model="ir.ui.view">-->
+<!--            <field name="name">cluster.taskforce.met.tree</field>-->
+<!--            <field name="model">cluster.taskforce.met</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Cluster Task Force">-->
+<!--                    <field name="prepared_by"/>-->
+<!--                    <field name="meeting_agenda"/>-->
+<!--                    <field name="date_of_meeting"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Action View of Form & Tree View &ndash;&gt;-->
+<!--         <record id="action_participant_list_form" model="ir.actions.act_window">-->
+<!--            <field name="name">Participant List </field>-->
+<!--            <field name="res_model">cluster.taskforce.met</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+
+    <record id="view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.property.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page name="sales_purchases" position="before">
+                <page string="Main Business" name="main_business">
+                    <group>
+                        <group string="Main Business" name="business_sale">
+                            <field name="ref" />
+                            <field name="cut_flowe" />
+                            <field name="vegetables_business" />
+                            <field name="herbs_business" />
+                            <field name="not_underproduction_business" />
+                        </group>
+                    </group>
+                </page>
+                </page>
+            </field>
+        </record>
+        <record id="view_partner_legality_form" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page name="internal_notes" position="after">
+                <page string="Company Legal Status" name="document">
+                    <group name="business_document" String="Business Document">
+                    <field name="business_document1"/>
+                    <field name="business_document2"/>
+                    </group>
+                    <group name="investment_document" String="Investment Document">
+                    <field name="investment_document1"/>
+                    <field name="investment_document2"/>
+                    </group>
+                </page>
+                </page>
+            </field>
+        </record>
+          <!-- Form View for Monitoring Tracking Tool -->
+        <record id="view_monitoring_tracking_tool_form" model="ir.ui.view">
+            <field name="name">monitoring.tracking.tool.form</field>
+            <field name="model">monitoring.tracking.tool</field>
+            <field name="arch" type="xml">
+                <form string="Monitoring tracking Tool">
+<!--                    <header>-->
+<!--                      <button name="action_ongoing" type="object"  string="On-going" states="draft"  class="oe_highlight"/>-->
+<!--                      <button name="action_completed" type="object" string="completed" states="ongoing"   class="oe_highlight"/>-->
+<!--                      <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,completed"/>-->
+<!--                    </header>-->
+                    <sheet>
+<!--                        <div class="oe_title">-->
+<!--                        <h1>-->
+<!--                            <field name="west_manage_sequs" readonly="1"/>-->
+<!--                        </h1>-->
+<!--                    </div>-->
+                        <group name="monitoring_tracking_tool">
+                          <group name="product_type">
+                            <field name="farm_name" placeholder="Support Request Name" />
+                            <field name="farm_name_land_size"/>
+                            <field name="developed"/>
+                            <field name="undeveloped"/>
+                            <field name="additional_expansion"/>
+                           </group>
+                        <group name="product_type">
+                            <field name="cut_flower"/>
+                            <field name="fruit"/>
+                            <field name="vegertables"/>
+                            <field name="herbs"/>
+                         </group>
+                         <group name="product_type">
+                            <field name="total_work_force"/>
+                            <field name="managerial"/>
+                            <field name="daily_laborer"/>
+                            <field name="wage_rate"/>
+                            <field name="workers_productivity"/>
+                         </group>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Waste Management Pilot View -->
+        <record id="view_monitoring_tracking_tool_tree" model="ir.ui.view">
+            <field name="name">monitoring.tracking.tool.tree</field>
+            <field name="model">monitoring.tracking.tool</field>
+            <field name="arch" type="xml">
+                <tree string="Monitoring Tracking Tool">
+                    <field name="farm_name"/>
+                    <field name="farm_name_land_size"/>
+                    <field name="total_work_force"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Waste Management Pilot Search View View Form -->
+        <record id="view_monitoring_tracking_tool_filter" model="ir.ui.view">
+            <field name="name">monitoring.tracking.tool.list.select</field>
+            <field name="model">monitoring.tracking.tool</field>
+            <field name="arch" type="xml">
+                <search string="Search Monitoring Tracking Tool">
+                    <field name="farm_name_land_size"/>
+                    <field name="cut_flower"/>
+                    <field name="fruit"/>
+                    <field name="vegertables"/>
+                    <field name="herbs"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Flower" domain="[]" context="{'group_by':'cut_flower'}"/>
+                        <filter name="fruit" string="Fruit" domain="[]" context="{'group_by':'fruit'}"/>
+                        <filter name="vegertables" string="Vegertables" domain="[]" context="{'group_by':'vegertables'}"/>
+                        <filter string="herbs" domain="[]" context="{'group_by':'herbs'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        <!-- Kanabn View For Waste Management Pilot -->
+         <record id="view_monitoring_tracking_tool_filter_kanban" model="ir.ui.view">
+            <field name="name">monitoring.tracking.tool.kanban</field>
+            <field name="model">monitoring.tracking.tool</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="farm_name"/>
+                    <field name="farm_name_land_size"/>
+                    <field name="total_work_force"/>
+                    <field name="wage_rate"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.farm_name.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.farm_name_land_size.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.total_work_force.value"/> <t t-esc="record.total_work_force.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.wage_rate.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Graph View For Waste Management Pilot View -->
+        <record id="view_monitoring_tracking_tool_graph" model="ir.ui.view" >
+            <field name="name">monitoring.tracking.tool.graph</field>
+            <field name="model">monitoring.tracking.tool</field>
+            <field name="arch" type="xml">
+                <graph string="Monitoring Tracking Tool">
+                  <field name="cut_flower"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_monitoring_tracking_tool_form" model="ir.actions.act_window">
+            <field name="name">Monitoring Tracking Tool</field>
+            <field name="res_model">monitoring.tracking.tool</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,search,kanban</field>
+        </record>
+
+
+<!-- Form View Of lobby Request Type -->
+         <record id="view_lobby_registration_form" model="ir.ui.view">
+            <field name="name">lobby.registrationt.form</field>
+            <field name="model">lobby.registration</field>
+            <field name="arch" type="xml">
+                <form string="Lobby Request">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="lobby_registration_seque" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="lobby_request">
+                            <field name="farm_name" placeholder="Request Farm Name" />
+                            <field name="requested_support"/>
+                            <field name="requested_by"/>
+                            <field name="Cluster_name"/>
+                            <field name="request_date"/>
+                            <field name="position" />
+                            <field name="camp_email"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of Lobby Request Form -->
+        <record id="view_lobby_registration_tree" model="ir.ui.view">
+            <field name="name">lobby.registration.tree</field>
+            <field name="model">lobby.registration</field>
+            <field name="arch" type="xml">
+                <tree string="Lobby Request">
+                    <field name="lobby_registration_seque" string="Lobby Request Number"/>
+                    <field name="requested_by"/>
+                    <field name="farm_name"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Lobby Request Graph View-->
+        <record id="view_lobby_registration_graph" model="ir.ui.view" >
+            <field name="name">lobby.registration.graph</field>
+            <field name="model">lobby.registration</field>
+            <field name="arch" type="xml">
+                <graph string="Lobby Request">
+                    <field name="lobby_registration_seque"/>
+                    <field name="farm_name"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Kanban View For Lobby Support Request -->
+        <record id="view_lobby_registration_kanban" model="ir.ui.view">
+            <field name="name">lobby.registration.kanban</field>
+            <field name="model">lobby.registration</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="lobby_registration_seque"/>
+                    <field name="requested_by"/>
+                    <field name="farm_name"/>
+                    <field name="request_date"/>
+                    <field name="camp_email"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.lobby_registration_seque.value"/></span></strong>
+                                    </div>
+<!--                                    <div class="col-xs-6 pull-right text-right">-->
+<!--                                        <strong><field name="request_person" widget="monetary"/></strong>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.requested_by.value"/> <t t-esc="record.requested_by.value"/></span>
+                                    </div>
+<!--                                    <div class="col-xs-6 text-muted">-->
+<!--                                        <span><t t-esc="record.partner_id.value"/> <t t-esc="record.partner_id.value"/></span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-xs-6 text-muted">-->
+<!--                                        <span><t t-esc="record.request_date.value"/> <t t-esc="record.request_date.value"/></span>-->
+<!--                                    </div>-->
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.camp_email.value"/> <t t-esc="record.camp_email.value"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+         <record id="action_lobby_registration_form" model="ir.actions.act_window">
+            <field name="name">Lobby Request</field>
+            <field name="res_model">lobby.registration</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,kanban</field>
+        </record>
+      <menuitem id="menu_ehpeas" name="EHPEA CRM System" sequence="1"/>
+
+
+        <!-- MenuItem For Code Audit -->
+        <menuitem id="menu_lobby_support" name="Lobby Support" parent="menu_ehpeas" sequence="20"/>
+        <!-- MenuItem For Code ->Code Audite System -->
+        <menuitem id="menu_lobby_config_form" name="Customer Lobby Support" parent="menu_lobby_support" />
+<!--       <menuitem id="submenu_lobby_request" name="Lobby Request Form" parent="menu_lobby_config_form" action="action_lobby_request_form" />-->
+       <menuitem id="submenu_lobby_request_registration" name="Lobby Request" parent="menu_lobby_config_form" action="action_lobby_registration_form" />
+       <menuitem id="submenu_lobby_vsit" name="Lobby status" parent="menu_lobby_config_form" action="action_lobby_support_form" />
+
+       <menuitem id="menu_ipm_study" name="IPM Study" parent="menu_ehpeas" sequence="20"/>
+        <!-- Menu Item For IPM -->
+        <menuitem id="menu_ipm_config_form" name="IPM Study Progress" parent="menu_ipm_study"/>
+        <menuitem id="submenu_ipm_request" name="IPM Request Form" parent="menu_ipm_config_form" action="action_ipm_request_form" />
+        <menuitem id="submenu_ipm_study" name="IPM Study status" parent="menu_ipm_config_form" action="action_ipm_support_form" />
+
+<!--      <menuitem id="menu_gender_study" name="Gender Study" parent="menu_ehpeas" sequence="20"/>-->
+<!--        <menuitem id="menu_gender_config_form" name="IPM Study Progress" parent="menu_gender_study"/>-->
+<!--        <menuitem id="submenu_gender_study" name="IPM Study two" parent="menu_gender_config_form" action="action_gender_support_request_form" />-->
+<!--        <menuitem id="submenu_gender_study_progress" name="IPM Study three" parent="menu_gender_config_form" action="action_gender_support_form" />-->
+
+        <menuitem id="menu_gender_support_study" name="Gender Support" parent="menu_ehpeas" sequence="20"/>
+        <menuitem id="menu_gender_config_form" name="Gender Support Progress" parent="menu_gender_support_study"/>
+        <menuitem id="submenu_gender_request" name="Gender Support Request Form" parent="menu_gender_config_form" action="action_gender_support_request_form" />
+        <menuitem id="submenu_gender_study_progress" name="Gender Support Status" parent="menu_gender_config_form" action="action_gender_support_form" />
+        <menuitem id="menu_waste_management_study" name="Waste Management" parent="menu_ehpeas" sequence="20"/>
+        <!-- Menu Item For Waste Management Piloting -->
+        <menuitem id="menu_waste_management_config_form" name="Waste Management Progress" parent="menu_waste_management_study" />
+        <menuitem id="submenu_waste_request" name="Waste Management Request Form" parent="menu_waste_management_config_form" action="action_waste_management_request_form" />
+        <menuitem id="submenu_waste_management_pilot" name="Waste Management status" parent="menu_waste_management_config_form" action="action_waste_management_form" />
+        <menuitem id="menu_annual_survey" name="Annual Survey " parent="menu_ehpeas" sequence="20"/>
+        <menuitem id="menu_annual_survey_config_form" name="Annual Survey Info" parent="menu_annual_survey" />
+        <menuitem id="submenu_annual_survey" name="Annual Survey Info" parent="menu_annual_survey_config_form" action="action_annual_farm_survey_form" />
+        <menuitem id="monitoring_tracking_tool" name="Monitoring Tracking Tool" parent="menu_annual_survey_config_form" action="action_monitoring_tracking_tool_form" />
+<!--        <menuitem id="submenu_participant_list" name="Cluster Meeting Info" parent="menu_annual_survey_config_form" action="action_participant_list_form" />-->
+</data>
+</odoo>

@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<odoo>
+
+        <!-- Form View Of lobby Request Type -->
+         <record id="view_lobby_request_form" model="ir.ui.view">
+            <field name="name">lobby.request_last.form</field>
+            <field name="model">lobby.request_last</field>
+            <field name="arch" type="xml">
+                <form string="Lobby Request">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="lobby_requ_seque" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="lobby_request">
+                            <field name="partner_id" placeholder="Request Farm Name" />
+                            <field name="request_farm"/>
+                            <field name="request_name"/>
+                            <field name="request_person"/>
+                            <field name="request_date"/>
+                            <field name="position" />
+                            <field name="comp_email"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of Lobby Request Form -->
+        <record id="view_lobby_request_tree" model="ir.ui.view">
+            <field name="name">lobby.request_last.tree</field>
+            <field name="model">lobby.request_last</field>
+            <field name="arch" type="xml">
+                <tree string="Lobby Request">
+                    <field name="lobby_requ_seque" string="Lobby Request Number"/>
+                    <field name="request_name"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action View of Certificate Request Form & Tree View -->
+         <record id="action_lobby_request_form" model="ir.actions.act_window">
+            <field name="name">Lobby Request</field>
+            <field name="res_model">lobby.request_last</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Form View Of Code Audite Visit Form -->
+        <record id="view_lobby_support_form" model="ir.ui.view">
+            <field name="name">lobby.support.for.form</field>
+            <field name="model">lobby.support.for</field>
+            <field name="arch" type="xml">
+                <form string="Lobby Support Visit">
+                    <header>
+                      <button name="action_on_going" type="object"  string="On-going" states="draft"  class="oe_highlight"/>
+                      <button name="action_complete" type="object" string="Completed" states="on_going"   class="oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="draft,on_going,completed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="lobby_seque" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="certificate_audit_visit">
+                            <field name="lobbyrequest_id" placeholder="Lobby Name" />
+                            <field name="request_person"/>
+                            <field name="date_reque"/>
+                            <field name="date_vist"/>
+                            <field name="cluster_name"/>
+                            <field name="support_provide"/>
+                            <field name="challenge"/>
+                            <field name="vist_camp_email"/>
+                            <field name="visite_history"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Code Audit Visit View -->
+        <record id="view_lobby_support_tree" model="ir.ui.view">
+            <field name="name">lobby.support.for.tree</field>
+            <field name="model">lobby.support.for</field>
+            <field name="arch" type="xml">
+                <tree string="Lobby Support Visit">
+                    <field name="lobby_seque"/>
+                    <field name="lobbyrequest_id"/>
+                    <field name="date_reque"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_lobby_support_form" model="ir.actions.act_window">
+            <field name="name">Lobby Support Visit</field>
+            <field name="res_model">lobby.support.for</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- IPM Study Request Form -->
+        <record id="view_ipm_request_form" model="ir.ui.view">
+            <field name="name">ipm.study.request.form</field>
+            <field name="model">ipm.study.request</field>
+            <field name="arch" type="xml">
+                <form string="IPM Study Request">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="ipm_study_request_sequ" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="ipm_request">
+                            <field name="partner_id" placeholder="Request Farm Name" />
+                            <field name="requested_support"/>
+                            <field name="requested_by"/>
+                            <field name="Cluster_name"/>
+                            <field name="request_date"/>
+                            <field name="camp_name" />
+                            <field name="camp_email"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of Lobby Request Form -->
+        <record id="view_ipm_request_tree" model="ir.ui.view">
+            <field name="name">ipm.study.request.tree</field>
+            <field name="model">ipm.study.request</field>
+            <field name="arch" type="xml">
+                <tree string="IPM Request">
+                    <field name="ipm_study_request_sequ" string="IPM Request Number"/>
+                    <field name="requested_support"/>
+                    <field name="partner_id"/>
+                    <field name="request_date"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action View of Certificate Request Form & Tree View -->
+         <record id="action_ipm_request_form" model="ir.actions.act_window">
+            <field name="name">IPM Request</field>
+            <field name="res_model">ipm.study.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Form View of IPM Study Progress Visit -->
+         <record id="view_ipm_support_form" model="ir.ui.view">
+            <field name="name">ipm.study.tracking.form</field>
+            <field name="model">ipm.study.tracking</field>
+            <field name="arch" type="xml">
+                <form string="IPM Support Visit">
+                    <header>
+                      <button name="action_verification" type="object"  string="Verification/Testing" states="identification"  class="oe_highlight"/>
+                      <button name="action_registration" type="object" string="Registration" states="verification"   class="oe_highlight"/>
+                      <button name="action_replication" type="object" string="Replication in other Farms" states="registration"   class="btn-primary oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="identification,verification,registration,replication_other"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="ipm_study_sequ" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="ipm_study_visit">
+                            <field name="ipm_request_id" placeholder="Support Request Name" />
+                            <field name="ipm_request_farm"/>
+                            <field name="request_person"/>
+                            <field name="date_reque"/>
+                            <field name="date_vist"/>
+                            <field name="cluster_names"/>
+                            <field name="support_provide"/>
+                            <field name="challenge"/>
+                            <field name="vist_camp_email"/>
+                            <field name="narrate_progress"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Code Audit Visit View -->
+        <record id="view_ipm_support_tree" model="ir.ui.view">
+            <field name="name">ipm.study.tracking.tree</field>
+            <field name="model">ipm.study.tracking</field>
+            <field name="arch" type="xml">
+                <tree string="IPM Study Visit">
+                    <field name="ipm_study_sequ"/>
+                    <field name="ipm_request_id"/>
+                    <field name="date_reque"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_ipm_support_form" model="ir.actions.act_window">
+            <field name="name">IPM Study Visit</field>
+            <field name="res_model">ipm.study.tracking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Form View For Waste Management Request Form -->
+        <record id="view_waste_management_request_form" model="ir.ui.view">
+            <field name="name">waste.management.request.form</field>
+            <field name="model">waste.management.request</field>
+            <field name="arch" type="xml">
+                <form string="Waste Management Request">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="west_mana_reqe" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="waste_management_request">
+                            <field name="partner_id" placeholder="Request Farm Name" />
+                            <field name="requested_support_name"/>
+                            <field name="weste_requested_by"/>
+                            <field name="west_cluster_name"/>
+                            <field name="weste_request_date"/>
+                            <field name="request_camp_name" />
+                            <field name="west_camp_email"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Waste Management Request Form -->
+        <record id="view_waste_management_tree" model="ir.ui.view">
+            <field name="name">waste.management.request.tree</field>
+            <field name="model">waste.management.request</field>
+            <field name="arch" type="xml">
+                <tree string="Waste Management Request">
+                    <field name="west_mana_reqe" string="Waste Management Request Number"/>
+                    <field name="requested_support_name"/>
+                    <field name="partner_id"/>
+                    <field name="weste_request_date"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action View of Waste Management Request Form & Tree View -->
+         <record id="action_waste_management_request_form" model="ir.actions.act_window">
+            <field name="name">Waste Management Request</field>
+            <field name="res_model">waste.management.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+            <!-- Form View for Waste Management Piloting Form -->
+        <record id="view_waste_management_pilot_form" model="ir.ui.view">
+            <field name="name">waste.management.pilot.form</field>
+            <field name="model">waste.management.pilot</field>
+            <field name="arch" type="xml">
+                <form string="Waste Management Pilot">
+                    <header>
+                      <button name="action_ongoing" type="object"  string="On-going" states="draft"  class="oe_highlight"/>
+                      <button name="action_completed" type="object" string="completed" states="completed"   class="oe_highlight"/>
+                      <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,completed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="west_manage_sequs" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="waste_management_pilot">
+                            <field name="waste_request_id" placeholder="Support Request Name" />
+                            <field name="request_farm"/>
+                            <field name="request_person"/>
+                            <field name="date_reque"/>
+                            <field name="date_vist"/>
+                            <field name="cluster_names"/>
+                            <field name="technology_name"/>
+                            <field name="challenge"/>
+                            <field name="vist_camp_email"/>
+                            <field name="narrate_progress"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Code Audit Visit View -->
+        <record id="view_waste_pilot_manage_tree" model="ir.ui.view">
+            <field name="name">waste.management.pilot.tree</field>
+            <field name="model">waste.management.pilot</field>
+            <field name="arch" type="xml">
+                <tree string="Waste Management Visit">
+                    <field name="west_manage_sequs"/>
+                    <field name="waste_request_id"/>
+                    <field name="date_reque"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_waste_management_form" model="ir.actions.act_window">
+            <field name="name">Waste Management Pilot</field>
+            <field name="res_model">waste.management.pilot</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+         <!-- Form View for Annual Survey Form -->
+        <record id="view_annual_farm_form" model="ir.ui.view">
+            <field name="name">annual.farm.survey.form</field>
+            <field name="model">annual.farm.survey</field>
+            <field name="arch" type="xml">
+                <form string="Annual Farm Survey">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="survey_seque" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="annual_farm_survey">
+                            <field name="partner_id"/>
+                            <group name="farm_land_size" String="Farm Land Size">
+                                <field name="developed_land"/>
+                                <field name="undeveloped_land"/>
+                                <field name="total_land_size"/>
+                             </group>
+                            <group name="farm_crop_type" String="Crop Type">
+                                <field name="cut_flower"/>
+                                <field name="fruit"/>
+                                <field name="vegertables"/>
+                                <field name="herbs"/>
+                                <field name="area_not_production"/>
+                            </group>
+                            <group name="farm_work_force" String="Farm Work Force">
+                                <field name="managerial"/>
+                                <field name="daily_laborer"/>
+                                <field name="total_work_force"/>
+                                <field name="wage_rate"/>
+                            </group>
+                            <group name="farm_production_marketing" String="Source from the Farm">
+                                <field name="farm_volume_exp"/>
+                                <field name="farm_value_exp"/>
+                            </group>
+                            <group name="farm_custom" String="Sources From Customs Authority" >
+                                <field name="custom_volume_exp"/>
+                                <field name="custom_value_exp"/>
+                            </group>
+                            <group name="farm_national_bank" String="Sources From National Bank Of Ethiopia " >
+                                <field name="national_volume_exp"/>
+                                <field name="national_value_exp"/>
+                            </group>
+                            <field name="survey_year"/>
+                        </group>
+                    </sheet>
+<!--                    <notebook>-->
+<!--                        <page string="Follow up">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up" state="certified"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Email Schedule">-->
+<!--                            <group>-->
+<!--                                <field name="follow_up"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>div
+                </form>
+            </field>
+        </record>
+        <!-- Tree View For Code Audit Visit View -->
+        <record id="view_annual_farm_survey_tree" model="ir.ui.view">
+            <field name="name">annual.farm.survey.tree</field>
+            <field name="model">annual.farm.survey</field>
+            <field name="arch" type="xml">
+                <tree string="Annual Farm Survey">
+                    <field name="survey_seque"/>
+                    <field name="partner_id"/>
+                    <field name="survey_year"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action View of Form & Tree View -->
+         <record id="action_annual_farm_survey_form" model="ir.actions.act_window">
+            <field name="name">Annual Farm Survey</field>
+            <field name="res_model">annual.farm.survey</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+<!--        &lt;!&ndash; Form view Cluster TaskForce Committee &ndash;&gt;-->
+<!--        <record id="view_cluster_task_form" model="ir.ui.view">-->
+<!--            <field name="name">cluster.taskforce.met.form</field>-->
+<!--            <field name="model">cluster.taskforce.met</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Cluster TaskForce Committee">-->
+<!--                    <sheet>-->
+<!--&lt;!&ndash;                        <div class="oe_title">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="meeting_reqe" readonly="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                        <group>-->
+<!--                            <field name="prepared_by" placeholder="Prepared By" />-->
+<!--                            <field name="region_of_taskforce"/>-->
+<!--                            <field name="venue_of_meeting"/>-->
+<!--                            <field name="date_of_meeting"/>-->
+<!--                            <field name="meeting_agenda"/>-->
+<!--                            <field name="way_forward"/>-->
+<!--                            <field name="participant_id"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                 <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>div-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Tree View OF Cluster Task Force &ndash;&gt;-->
+<!--        <record id="view_cluster_taskforce_tree" model="ir.ui.view">-->
+<!--            <field name="name">cluster.taskforce.met.tree</field>-->
+<!--            <field name="model">cluster.taskforce.met</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Cluster Task Force">-->
+<!--                    <field name="prepared_by"/>-->
+<!--                    <field name="meeting_agenda"/>-->
+<!--                    <field name="date_of_meeting"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Action View of Form & Tree View &ndash;&gt;-->
+<!--         <record id="action_participant_list_form" model="ir.actions.act_window">-->
+<!--            <field name="name">Participant List </field>-->
+<!--            <field name="res_model">cluster.taskforce.met</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+        <!-- Menu Item Of EMS -->
+        <menuitem id="menu_ehpea" name="EHPEA CRM" sequence="1"/>
+
+        <!-- MenuItem For Code Audit -->
+        <menuitem id="menu_lobby_support" name="Lobby Support" parent="menu_ehpea" sequence="20"/>
+        <!-- MenuItem For Code ->Code Audite System -->
+        <menuitem id="menu_lobby_config_form" name="Customer Lobby Support" parent="menu_lobby_support" />
+        <menuitem id="submenu_lobby_request" name="Lobby Request Form" parent="menu_lobby_config_form" action="action_lobby_request_form" />
+        <menuitem id="submenu_lobby_vsit" name="Lobby Visit" parent="menu_lobby_config_form" action="action_lobby_support_form" />
+        <!-- Menu Item For IPM Study -->
+        <menuitem id="menu_ipm_study" name="IPM Study" parent="menu_ehpea" sequence="20"/>
+        <!-- Menu Item For IPM -->
+        <menuitem id="menu_ipm_config_form" name="IPM Study Progress" parent="menu_ipm_study" />
+        <menuitem id="submenu_ipm_request" name="IPM Request Form" parent="menu_ipm_config_form" action="action_ipm_request_form" />
+        <menuitem id="submenu_ipm_study" name="IPM Study Progress Form" parent="menu_ipm_config_form" action="action_ipm_support_form" />
+        <!-- Menu Items Waste Management Piloting Progress -->
+        <menuitem id="menu_waste_management_study" name="Waste Management" parent="menu_ehpea" sequence="20"/>
+        <!-- Menu Item For Waste Management Piloting -->
+        <menuitem id="menu_waste_management_config_form" name="Waste Management Progress" parent="menu_waste_management_study" />
+        <menuitem id="submenu_waste_request" name="Waste Management Request Form" parent="menu_waste_management_config_form" action="action_waste_management_request_form" />
+        <menuitem id="submenu_waste_management_pilot" name="Waste Management Pilot Form" parent="menu_waste_management_config_form" action="action_waste_management_form" />
+
+        <!-- Menu Item Annual Survey -->
+        <menuitem id="menu_annual_survey" name="Annual Survey " parent="menu_ehpea" sequence="20"/>
+        <menuitem id="menu_annual_survey_config_form" name="Annual Survey Info" parent="menu_annual_survey" />
+        <menuitem id="submenu_annual_survey" name="Annual Survey Info" parent="menu_annual_survey_config_form" action="action_annual_farm_survey_form" />
+        <menuitem id="submenu_participant_list" name="Cluster Meeting Info" parent="menu_annual_survey_config_form" action="action_participant_list_form" />
+
+    <!--        <menuitem id="submenu_certificate_audit_visit" name="Code Audit Visit" parent="menu_codeaudit_config_form" action="action_certificate_audit_visit_form" />-->
+</odoo>

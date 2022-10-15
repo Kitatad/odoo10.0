@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lobby_registration,access.lobby.registration,model_lobby_registration,,1,1,1,1
+access_lobby_support_form,access.lobby.support.form,model_lobby_support_form,,1,1,1,1
+access_ipm_study_request,access.ipm.study.request,model_ipm_study_request,,1,1,1,1
+access_ipm_study_tracking,access.ipm.study.tracking,model_ipm_study_tracking,,1,1,1,1
+access_waste_management_request,access.waste.management.request,model_waste_management_request,,1,1,1,1
+access_waste_management_pilot,access.waste.management.pilot,model_waste_management_pilot,,1,1,1,1
+access_annual_farm_survey,access.annual.farm.survey,model_annual_farm_survey,,1,1,1,1
+access_gender_support_request,access.gender.support.request,model_gender_support_request,,1,1,1,1
+access_gender_study_tracking,access.gender.study.tracking,model_gender_study_tracking,,1,1,1,1

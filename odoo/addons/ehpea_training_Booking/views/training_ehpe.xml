@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<odoo>
+    <data>
+     <!-- Form View Of Training Department Booking -->
+         <record id="view_training_department_book_form" model="ir.ui.view">
+            <field name="name">training.department.book.form</field>
+            <field name="model">training.department.book</field>
+            <field name="arch" type="xml">
+                <form string="Training Department Booking">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="training_booking_seque" readonly="1"/>
+                        </h1>
+                    </div>
+                        <group name="training_booking">
+                            <field name="farm_name" placeholder="Farm Name" />
+                            <field name="farm_location" placeholder="Farm Location"/>
+                            <field name="contact_person" placeholder="Farm Location"/>
+                            <field name="position" placeholder="Position"/>
+                            <field name="tel" placeholder="Tel"/>
+                            <field name="cell_phone" placeholder="Cell Phone"/>
+                            <field name="email" placeholder="E-mail"/>
+                            <group name="safe_use_pepsticide">
+                            <field name="safe_use_of_pesticide"/>
+                            <field name="planned_date_safe"/>
+                            <field name="number_of_safepesticide"/>
+                            </group>
+                             <group name="safe_use_pepsticide">
+                            <field name="pesticide_store"/>
+                            <field name="planned_date_pesticide"/>
+                            <field name="number_of_pesticide_store"/>
+                             </group>
+                            <group name="supervision">
+                            <field name="supervision_skill"/>
+                            <field name="planned_date_supervision"/>
+                            <field name="number_of_supervision"/>
+                            </group>
+                            <group name="crop">
+                            <field name="crop_scouting"/>
+                            <field name="planned_date_crop"/>
+                            <field name="number_of_crop_scouting"/>
+                            </group>
+                            <group name="internal_auditing">
+                            <field name="internal_auditing"/>
+                            <field name="planned_date_internal"/>
+                            <field name="number_of_internal_auditing"/>
+                            </group>
+                            <group name="environment">
+                            <field name="environment_officer"/>
+                            <field name="planned_date_officer"/>
+                            <field name="number_of_enviroment_officer"/>
+                            </group>
+                            <group name="environment_two">
+                            <field name="environment"/>
+                            <field name="planned_date_environment"/>
+                            <field name="number_enviroment"/>
+                            </group>
+                            <group name="safety_officer">
+                            <field name="farm_safety_officer"/>
+                            <field name="planned_date_safety_officer"/>
+                            <field name="number_farm_safety_officer"/>
+                            </group>
+                            <group name="farm_safety_officer">
+                            <field name="farm_safety"/>
+                            <field name="planned_date_farm_safety"/>
+                            <field name="number_farm_safety"/>
+                            </group>
+                            <group name="ipm_training">
+                            <field name="IPM_one"/>
+                            <field name="plane_date_IPM_one"/>
+                            <field name="number_of_IPM_One_trainer"/>
+                            </group>
+                            <group name="ipm_training_two">
+                            <field name="IPM_Two"/>
+                            <field name="plane_date_IPM_Two"/>
+                            <field name="number_of_IPM_One_trainer"/>
+                            </group>
+                            <group name="waste_management_training">
+                            <field name="waste_management"/>
+                            <field name="date_waste_management"/>
+                            <field name="number_waste_management"/>
+                            </group>
+                            <group name="gender_training">
+                            <field name="Gender_Sensitive_Management"/>
+                            <field name="date_Gender_sensitive_management"/>
+                            <field name="number_of_gender_sensitive_management_trainer"/>
+                            </group>
+                            <group name="gender_workplace_sexual_harassment">
+                            <field name="workplace_sexual_harassment"/>
+                            <field name="date_work_place_harassment"/>
+                            <field name="number_of_trainer_work"/>
+                            </group>
+                            <group name="gender_base_violences">
+                            <field name="gender_base_violence"/>
+                            <field name="date_of_training_gender_base_violence"/>
+                            <field name="number_of_trainer_gender_base_violence"/>
+                            </group>
+                            <group name="hygiene_trainings">
+                            <field name="hygiene_training"/>
+                            <field name="date_of_hygiene_training"/>
+                            <field name="number_of_hygiene_trainer"/>
+                            </group>
+                            <group name="family_plannings">
+                            <field name="family_planning"/>
+                            <field name="date_of_family_planning"/>
+                            <field name="number_of_family_planning_trainer"/>
+                            </group>
+                            <group name="other">
+                            <field name="other"/>
+                            <field name="planned_date_other"/>
+                            </group>
+                             <field name="total_number"/>
+                        </group>
+                    </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of Training Booking Form -->
+        <record id="view_training_department_book_tree" model="ir.ui.view">
+            <field name="name">training.department.book.tree</field>
+            <field name="model">training.department.book</field>
+            <field name="arch" type="xml">
+                <tree string="Training Booking">
+                    <field name="farm_name" string="Farm Name"/>
+                    <field name="number_of_safepesticide" sum="NO Safe Use of Pesticide"/>
+                    <field name="number_of_pesticide_store" sum="NO Pesticide Store"/>
+                    <field name="number_of_supervision" sum="NO Supervision Skill"/>
+                    <field name="number_of_crop_scouting" sum=" NO Crop Scouting"/>
+                    <field name="number_of_internal_auditing" sum=" NO Internal Auditing"/>
+                    <field name="number_of_enviroment_officer" sum=" NO Environment Officer"/>
+                    <field name="number_enviroment" sum=" NO Environment"/>
+                    <field name="number_farm_safety_officer" sum=" NO Farm Safety Officer"/>
+                    <field name="number_farm_safety" sum=" NO Farm Safety"/>
+                    <field name="other" sum=" Other"/>
+
+                </tree>
+            </field>
+        </record>
+        <!-- Training Department Booking Graph View-->
+        <record id="view_training_department_book_graph" model="ir.ui.view" >
+            <field name="name">training.department.book.graph</field>
+            <field name="model">training.department.book</field>
+            <field name="arch" type="xml">
+                <graph string="Training Department Booking">
+                    <field name="safe_use_of_pesticide"/>
+                    <field name="pesticide_store"/>
+                    <field name="supervision_skill"/>
+                    <field name="crop_scouting"/>
+                    <field name="internal_auditing"/>
+                    <field name="environment_officer"/>
+                    <field name="environment"/>
+                    <field name="farm_safety_officer"/>
+                    <field name="farm_safety"/>
+                    <field name="other"/>
+                </graph>
+            </field>
+        </record>
+        <!-- Kanban View For Lobby Support Request -->
+        <record id="view_training_department_book_kanban" model="ir.ui.view">
+            <field name="name">training.department.book.kanban</field>
+            <field name="model">training.department.book</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="farm_name"/>
+                    <field name="farm_location"/>
+                    <field name="contact_person"/>
+                    <field name="position"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.training_booking_seque.value"/></span></strong>
+                                    </div>
+<!--                                    <div class="col-xs-6 pull-right text-right">-->
+<!--                                        <strong><field name="request_person" widget="monetary"/></strong>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.farm_name.value"/> <t t-esc="record.farm_name.value"/></span>
+                                    </div>
+<!--                                    <div class="col-xs-6 text-muted">-->
+<!--                                        <span><t t-esc="record.partner_id.value"/> <t t-esc="record.partner_id.value"/></span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-xs-6 text-muted">-->
+<!--                                        <span><t t-esc="record.request_date.value"/> <t t-esc="record.request_date.value"/></span>-->
+<!--                                    </div>-->
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.farm_location.value"/> <t t-esc="record.farm_location.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.contact_person.value"/> <t t-esc="record.contact_person.value"/></span>
+                                    </div>
+                                     <div class="col-xs-6 text-muted">
+                                        <span><t t-esc="record.position.value"/> <t t-esc="record.position.value"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action View of Training Department Booking Form & Tree View -->
+         <record id="action_training_department_book_form" model="ir.actions.act_window">
+            <field name="name">Training Department Booking</field>
+            <field name="res_model">training.department.book</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,kanban,select</field>
+        </record>
+
+        <!-- Search View For Training Department Booking -->
+        <record id="view_training_department_book_filter" model="ir.ui.view">
+            <field name="name">training.department.book.select</field>
+            <field name="model">training.department.book</field>
+            <field name="arch" type="xml">
+                <search string="Search Training Booking">
+                    <field name="training_booking_seque" string="Training Booking" filter_domain="['|',('training_booking_seque','ilike',self),('farm_name','ilike',self),('farm_name','ilike',self)]"/>
+                    <field name="farm_name"/>
+                    <field name="farm_location"/>
+                    <field name="contact_person"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Safe Use of Pesticide" domain="[]" context="{'group_by':'safe_use_of_pesticide'}"/>
+                        <filter name="pesticide_store" string="Pesticide Store" domain="[]" context="{'group_by':'pesticide_store'}"/>
+                        <filter string="Supervision Skill" domain="[]" context="{'group_by':'supervision_skill'}"/>
+                        <filter string="Crop Scouting" domain="[]" context="{'group_by':'crop_scouting'}"/>
+                        <filter string="Internal Auditing" domain="[]" context="{'group_by':'internal_auditing'}"/>
+                        <filter string="Environment Officer" domain="[]" context="{'group_by':'environment_officer'}"/>
+                        <filter string="Environment" domain="[]" context="{'group_by':'environment'}"/>
+                        <filter string="Farm Safety Officer" domain="[]" context="{'group_by':'farm_safety_officer'}"/>
+                        <filter string="Farm Safety" domain="[]" context="{'group_by':'farm_safety'}"/>
+                        <filter string="Others" domain="[]" context="{'group_by':'other'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+      <menuitem id="menu_training_booking" name="Training Booking" sequence="10"/>
+        <menuitem id="menu_training_department_booking" name="Training Department Booking" parent="menu_training_booking" sequence="20"/>
+        <menuitem id="menu_training_booking_form" name="Training Booking" parent="menu_training_department_booking" action="action_training_department_book_form" />
+
+</data>
+</odoo>

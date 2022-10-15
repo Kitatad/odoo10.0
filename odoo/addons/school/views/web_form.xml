@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="menu_certificate_request_form12" model="website.menu">
+        <field name="name">Certificate Request </field>
+        <field name="url">/certificate_request_webform</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">96</field>
+    </record>
+    <template id="create_certificate_request" name="Create Waste Management Request">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <div class="container">
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
