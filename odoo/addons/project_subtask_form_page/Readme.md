@@ -1,1 +1,0 @@
-* first version 07.10.2018
